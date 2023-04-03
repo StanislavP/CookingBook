@@ -29,8 +29,10 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http, SecurityContextRepository securityContextRepository) throws Exception {
         http.authorizeHttpRequests().requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                .requestMatchers("/").permitAll()
+                .requestMatchers("/" , "/fonts/**").permitAll()
 //                .requestMatchers("").hasRole(UserRoles.ADMIN.name())
+                .requestMatchers("/auth/login/**","/auth/login-error", "/auth/registration", "/registration/success")
+                .anonymous()
                 .anyRequest()
                 .authenticated()
                 .and()
@@ -39,13 +41,12 @@ public class SecurityConfiguration {
                 .key("uniqueAndSecret")
                 .and()
                 .formLogin()
-//                .loginPage("/auth/login")
+                .loginPage("/auth/login")
                 .usernameParameter(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY)
                 .passwordParameter(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_PASSWORD_KEY)
-                .defaultSuccessUrl("/home",true)
+                .defaultSuccessUrl("/",true)
                 .failureForwardUrl("/auth/login-error")
-                .and()
-                .logout()
+                .and().logout()//configure logout
                 .logoutUrl("/auth/logout")
                 .logoutSuccessUrl("/")
                 .invalidateHttpSession(true)

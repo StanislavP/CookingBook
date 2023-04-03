@@ -7,11 +7,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "users")
-public class UserEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class UserEntity extends  BaseEntity {
 
     @Column(name = "user_name")
     private String username;
@@ -22,18 +18,21 @@ public class UserEntity {
     @Column(unique = true,nullable = false)
     private String email;
 
+    @Column
+    private Boolean isActive; //– true OR false.
+
     @ManyToMany(fetch = FetchType.EAGER)
     private List<RoleEntity> roles;
 
     public UserEntity() {
     }
 
-    public Long getId() {
-        return id;
+    public Boolean getActive() {
+        return isActive;
     }
 
-    public UserEntity setId(Long id) {
-        this.id = id;
+    public UserEntity setActive(Boolean active) {
+        isActive = active;
         return this;
     }
 

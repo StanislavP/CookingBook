@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/head}"></head>
+
+<body>
+<!-- Preloader -->
+<div id="preloader">
+    <i class="circle-preloader"></i>
+    <img src="/images/core-img/salad.png" alt="">
+</div>
+
+<!-- ##### Header Area Start ##### -->
+<header class="header-area">
+
+    <div th:replace="~{fragments/header}"></div>
+
+    <!-- Navbar Area -->
+    <div class="delicious-main-menu">
+        <div class="classy-nav-container breakpoint-off">
+            <div class="container">
+                <nav th:replace="~{fragments/navigation}"></nav>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- ##### Header Area End ##### -->
+
+<!-- ##### Contact Area Start ##### -->
+<div class="contact-area section-padding-0-80">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="section-heading">
+                    <h3>Login</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="contact-form-area">
+                    <form th:method="POST"
+                          th:action="@{/auth/login}"
+                          class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
+
+                        <div class="form-group">
+                            <label for="username"
+                                   class="text-white font-weight-bold">
+                                Username
+                            </label>
+
+                            <input th:classappend="${bad_credentials !=  null? 'alert-danger' : ''}" value="username"
+                                   id="username"
+                                   name="username"
+                                   th:value="${username}"
+                                   type="text"
+                                   min="2"
+                                   max="50"
+                                   class="form-control"
+                                   placeholder="Username"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password" class="text-white font-weight-bold">Password</label>
+                            <input th:classappend="${bad_credentials !=  null? 'alert-danger' : ''}"  id="password" name="password" type="password" min="2"
+                                   max="20" class="form-control"
+                                   placeholder="Password"/>
+
+                        </div>
+
+                        <p th:if="${bad_credentials}"
+                           class="errors alert alert-danger">
+                            Invalid username or password.
+                        </p>
+
+                        <div class="row">
+                            <div class="col col-md-4">
+                                <div class="button-holder d-flex">
+                                    <input type="submit" class="btn delicious-btn mt-30" value="Login"/>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ##### Contact Area End ##### -->
+
+<!-- Footer Area -->
+<footer th:replace="~{fragments/footer}"></footer>
+
+<!-- All Javascript Files -->
+<div th:replace="~{fragments/scripts}"></div>
+</body>
+
+</html>

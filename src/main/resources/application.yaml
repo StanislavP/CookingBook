@@ -1,3 +1,8 @@
+cloudinary:
+  api-key: 928422595789334
+  api-secret: kh2Q8rjibm0A23G5HMblUNSZSHM
+  cloud-name: dl9mgrpng
+
 logging:
   level:
     blog: WARN
@@ -9,18 +14,25 @@ server:
 spring:
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
-    password: 12345
-    url: jdbc:mysql://localhost:3306/CookingBook?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC
-    username: root
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/CookingBook?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC
+    username: ${MYSQL_USER:root_softuni}
+    password: 1234
   jpa:
+    defer-datasource-initialization: true
     hibernate:
       ddl-auto: update
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.MySQL8Dialect
+        dialect: org.hibernate.dialect.MySQLDialect
         format_sql: true
         show_sql: true
   mvc:
     hidden-method:
       filter:
         enabled: true
+mail:
+  host: ${MAIL_HOST:smtp.abv.bg}
+  port: ${MAIL_PORT:465}
+  username: ${MAIL_USERNAME:no-replay-cookingbook@abv.bg}
+  password: ${MAIL_PASS:cookingbook123456}
+

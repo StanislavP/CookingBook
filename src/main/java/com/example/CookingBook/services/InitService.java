@@ -40,13 +40,15 @@ public class InitService {
     }
 
     private void initUsers() {
-        var user1 = new UserEntity()
-                .setUsername("goshko")
-                .setPassword(passwordEncoder.encode("123456"))
-                .setEmail("goshko@abv.hu")
-                .setRoles(roleRepository.findAll());
+        if (this.userRepository.count() == 0) {
+            var user1 = new UserEntity()
+                    .setUsername("goshko")
+                    .setPassword(passwordEncoder.encode("123456"))
+                    .setEmail("goshko@abv.bg")
+                    .setRoles(roleRepository.findAll());
 
-        userRepository.save(user1);
+            userRepository.save(user1);
+        }
     }
 
 
