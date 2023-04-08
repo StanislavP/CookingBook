@@ -1,7 +1,10 @@
 package com.example.CookingBook.models.entity;
 
 import com.example.CookingBook.enums.UserRoles;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "roles")

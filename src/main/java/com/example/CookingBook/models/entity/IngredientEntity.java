@@ -1,10 +1,11 @@
 package com.example.CookingBook.models.entity;
 
-import com.example.CookingBook.enums.MeasureUnits;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 @Entity
 @Table(name = "ingredients")

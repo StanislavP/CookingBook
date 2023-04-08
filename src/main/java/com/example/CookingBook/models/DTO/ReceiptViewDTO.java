@@ -3,9 +3,6 @@ package com.example.CookingBook.models.DTO;
 import com.example.CookingBook.models.entity.CommentEntity;
 import com.example.CookingBook.models.entity.DifficultyEntity;
 import com.example.CookingBook.models.entity.IngredientEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
 
 import java.util.Date;
 import java.util.List;

@@ -30,6 +30,7 @@ dependencies {
 	testImplementation 'com.icegreen:greenmail:2.0.0'
 	testImplementation 'org.springframework.security:spring-security-test'
 	testRuntimeOnly 'org.hsqldb:hsqldb'
+	annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
 
 
 }

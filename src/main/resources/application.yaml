@@ -9,6 +9,10 @@ logging:
     org: warn
     org.hibernate.SQL: DEBUG
 
+cloud:
+  service:
+    mocked: false
+
 server:
   port: ${SERVER_PORT:8080}
   address: ${SERVER_ADDRESS:localhost}
@@ -41,4 +45,3 @@ mail:
   port: ${MAIL_PORT:465}
   username: ${MAIL_USERNAME:no-replay-cookingbook@abv.bg}
   password: ${MAIL_PASS:cookingbook123456}
-

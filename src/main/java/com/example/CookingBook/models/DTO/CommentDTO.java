@@ -1,7 +1,5 @@
 package com.example.CookingBook.models.DTO;
 
-import com.example.CookingBook.models.entity.UserEntity;
-
 public class CommentDTO {
 
     private String comment;

@@ -1,7 +1,6 @@
 package com.example.CookingBook.services;
 
 import com.example.CookingBook.enums.MeasureUnits;
-import com.example.CookingBook.models.DTO.UserRegisterDTO;
 import com.example.CookingBook.models.entity.MeasureUnitEntity;
 import com.example.CookingBook.repository.MeasureUnitRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class MeasureUnitsService {

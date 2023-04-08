@@ -3,7 +3,6 @@ package com.example.CookingBook.validations.annotation;
 import com.example.CookingBook.validations.userValidation.ProductValidator;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
-import org.springframework.stereotype.Component;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

@@ -1,7 +1,6 @@
 package com.example.CookingBook.models.DTO;
 
 import com.example.CookingBook.enums.Difficulty;
-import com.example.CookingBook.models.entity.DifficultyEntity;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;

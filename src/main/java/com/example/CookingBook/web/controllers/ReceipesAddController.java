@@ -2,7 +2,6 @@ package com.example.CookingBook.web.controllers;
 
 import com.example.CookingBook.enums.MeasureUnits;
 import com.example.CookingBook.models.DTO.IngredientDTO;
-import com.example.CookingBook.models.DTO.ProductViewDTO;
 import com.example.CookingBook.models.DTO.ReceiptAddDTO;
 import com.example.CookingBook.models.DTO.ReceiptViewDTO;
 import com.example.CookingBook.models.entity.*;

@@ -1,8 +1,6 @@
 package com.example.CookingBook.models.entity;
 
-import com.example.CookingBook.repository.UserRepository;
 import jakarta.persistence.*;
-import org.w3c.dom.Text;
 
 import java.util.Date;
 import java.util.List;

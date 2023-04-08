@@ -5,13 +5,13 @@ import com.example.CookingBook.models.DTO.UserDTO;
 import com.example.CookingBook.models.DTO.UserRegisterDTO;
 import com.example.CookingBook.models.entity.UserActivationLinkEntity;
 import com.example.CookingBook.models.entity.UserEntity;
+import com.example.CookingBook.repository.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import com.example.CookingBook.repository.UserRepository;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -59,15 +59,12 @@ public class UserService {
 
         UserActivationLinkEntity userLink = userActivationLink.generateCodeForNewUser(userEntity);
 
-        ;
 
-
-        ;
         emailService.sendRegistrationEmail(userEntity.getEmail(),
                 userEntity.getFirstName() + " " + userEntity.getLastName(),
                 "http://" + serverHost + ":" + serverPort + "/auth/confirm-account?token=" + userLink.getConfirmationToken());
 
-        //
+
     }
 
     public Optional<UserEntity> getUserByEmailOptional(String email) {

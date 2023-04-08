@@ -1,16 +1,13 @@
 package com.example.CookingBook.web.controllers;
 
-import com.example.CookingBook.models.DTO.UserDTO;
 import com.example.CookingBook.models.DTO.UserViewDTO;
 import com.example.CookingBook.models.entity.UserEntity;
 import com.example.CookingBook.services.UserService;
 import com.example.CookingBook.web.annotations.PageTitle;
 import org.modelmapper.ModelMapper;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;

@@ -2,9 +2,10 @@ package com.example.CookingBook.models.DTO;
 
 import com.example.CookingBook.enums.MeasureUnits;
 import com.example.CookingBook.validations.annotation.ProductValidation;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.Digits;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 import java.math.BigDecimal;
 @ProductValidation

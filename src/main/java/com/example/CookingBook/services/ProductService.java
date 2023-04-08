@@ -2,7 +2,6 @@ package com.example.CookingBook.services;
 
 import com.example.CookingBook.models.DTO.ProductDTO;
 import com.example.CookingBook.models.entity.ProductEntity;
-import com.example.CookingBook.models.entity.ReceiptEntity;
 import com.example.CookingBook.repository.ProductRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;

@@ -1,13 +1,11 @@
 package com.example.CookingBook.services;
 
-import com.example.CookingBook.models.DTO.IngredientDTO;
 import com.example.CookingBook.models.entity.IngredientEntity;
 import com.example.CookingBook.repository.IngredientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class IngredientService {

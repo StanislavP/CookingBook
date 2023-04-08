@@ -1,6 +1,8 @@
 package com.example.CookingBook.config;
 
 import com.example.CookingBook.enums.UserRoles;
+import com.example.CookingBook.repository.UserRepository;
+import com.example.CookingBook.services.AppUserDetailsService;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,8 +16,6 @@ import org.springframework.security.web.context.DelegatingSecurityContextReposit
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.security.web.context.RequestAttributeSecurityContextRepository;
 import org.springframework.security.web.context.SecurityContextRepository;
-import com.example.CookingBook.repository.UserRepository;
-import com.example.CookingBook.services.AppUserDetailsService;
 
 @Configuration
 public class SecurityConfiguration {
@@ -33,8 +33,8 @@ public class SecurityConfiguration {
                     .permitAll()
                 .requestMatchers("/" , "/fonts/**","/scss/**","/error/**" )
                     .permitAll()
-                .requestMatchers("/product/**").hasRole(UserRoles.MODERATOR.name())
-                .requestMatchers("").hasRole(UserRoles.ADMIN.name())
+                .requestMatchers("/product/add", "/product/delete/**", "/product/edit/**").hasRole(UserRoles.MODERATOR.name())
+                .requestMatchers("/admin/**").hasRole(UserRoles.ADMIN.name())
                 .requestMatchers( "/auth/login/**","/auth/login-error", "/auth/register","/auth/confirm-account")
                     .anonymous()
                 .anyRequest()

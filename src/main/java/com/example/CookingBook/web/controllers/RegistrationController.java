@@ -1,6 +1,5 @@
 package com.example.CookingBook.web.controllers;
 
-import com.example.CookingBook.models.DTO.UserActivationDTO;
 import com.example.CookingBook.models.DTO.UserRegisterDTO;
 import com.example.CookingBook.models.entity.UserActivationLinkEntity;
 import com.example.CookingBook.models.entity.UserEntity;

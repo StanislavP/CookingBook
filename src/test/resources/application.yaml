@@ -7,8 +7,16 @@ spring:
     init:
       mode: never
 
-#mail:
-#  host: "localhost"
-#  port: 1025
-#  username: "mobilele@mobilele.com"
-#  password: "topsecret"
+mail:
+  host: "localhost"
+  port: 5001
+  username: "mobilele@mobilele.com"
+  password: "topsecret"
+
+server:
+  port: ${SERVER_PORT:8080}
+  address: ${SERVER_ADDRESS:localhost}
+
+cloud:
+  service:
+    mocked: true

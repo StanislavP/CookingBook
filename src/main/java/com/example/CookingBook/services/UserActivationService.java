@@ -1,16 +1,11 @@
 package com.example.CookingBook.services;
 
-import com.example.CookingBook.models.DTO.UserActivationDTO;
-import com.example.CookingBook.models.DTO.UserDTO;
 import com.example.CookingBook.models.entity.UserActivationLinkEntity;
 import com.example.CookingBook.models.entity.UserEntity;
 import com.example.CookingBook.repository.UserActivationLinkRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class UserActivationService {

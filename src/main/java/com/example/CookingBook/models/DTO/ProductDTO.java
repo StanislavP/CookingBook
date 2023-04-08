@@ -1,12 +1,9 @@
 package com.example.CookingBook.models.DTO;
 
 import com.example.CookingBook.enums.Categories;
-import com.example.CookingBook.models.entity.CategoryEntity;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-
-import java.util.Locale;
 
 public class ProductDTO {
 
