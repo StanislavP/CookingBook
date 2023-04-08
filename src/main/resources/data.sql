@@ -3,7 +3,7 @@
 INSERT INTO roles (id, user_role)
 values
     (1, 'ADMIN'),
-    (2, 'USER');
+    (2, 'MODERATOR');
 
 INSERT INTO users ( email, first_name, last_name, is_active, password)
 VALUES

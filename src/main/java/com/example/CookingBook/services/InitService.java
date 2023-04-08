@@ -20,15 +20,17 @@ public class InitService {
     private final CategoryRepository categoryRepository;
     private final DifficultyRepository difficultyRepository;
     private final MeasureUnitRepository measureUnitRepository;
+    private final ProductRepository productRepository;
 
     @Autowired
-    public InitService(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder, CategoryRepository categoryRepository, DifficultyRepository difficultyRepository, MeasureUnitRepository measureUnitRepository) {
+    public InitService(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder, CategoryRepository categoryRepository, DifficultyRepository difficultyRepository, MeasureUnitRepository measureUnitRepository, ProductRepository productRepository) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
         this.categoryRepository = categoryRepository;
         this.difficultyRepository = difficultyRepository;
         this.measureUnitRepository = measureUnitRepository;
+        this.productRepository = productRepository;
     }
 
     @PostConstruct
@@ -38,6 +40,7 @@ public class InitService {
         initCategories();
         initDifficulties();
         initMeasureUnits();
+        initProduct();
     }
 
     private void initRoles() {
@@ -93,6 +96,41 @@ public class InitService {
                     .setRoles(roleRepository.findAll());
 
             userRepository.save(user1);
+        }
+    }
+
+    private void initProduct() {
+        if (this.productRepository.count() == 0) {
+            var product1 = new ProductEntity()
+                    .setName("Tomato")
+                    .setCategory(categoryRepository.findById(1L).orElseThrow());
+            var product2 = new ProductEntity()
+                    .setName("Potato")
+                    .setCategory(categoryRepository.findById(2L).orElseThrow());
+
+            var product3 = new ProductEntity()
+                    .setName("Onion")
+                    .setCategory(categoryRepository.findById(3L).orElseThrow());
+
+            var product4 = new ProductEntity()
+                    .setName("Cocoa")
+                    .setCategory(categoryRepository.findById(4L).orElseThrow());
+
+            var product5 = new ProductEntity()
+                    .setName("Salt")
+                    .setCategory(categoryRepository.findById(1L).orElseThrow());
+
+            var product6 = new ProductEntity()
+                    .setName("Syrup")
+                    .setCategory(categoryRepository.findById(1L).orElseThrow());
+
+
+            productRepository.save(product1);
+            productRepository.save(product2);
+            productRepository.save(product3);
+            productRepository.save(product4);
+            productRepository.save(product5);
+            productRepository.save(product6);
         }
     }
 
