@@ -30,8 +30,15 @@
 
 
 <section class="small-receipe-area section-padding-80-0">
-    <a th:if="${isPrevVisible}" th:href="@{/receipes/view_all/{page}(page = ${currentPage - 1})}">Prev</a>
-    <a th:if="${isNextVisible}" th:href="@{/receipes/view_all/{page}(page = ${currentPage + 1})}">Next</a>
+    <div class="row">
+        <div class="col-12">
+            <div class="section-heading">
+                <a th:if="${isPrevVisible}" class="btn delicious-btn mt-30" th:href="@{/product/view_user_recipes/{page}(page = ${currentPage - 1})}">Prev</a>
+                <a th:if="${isNextVisible}" class="btn delicious-btn mt-30" th:href="@{/product/view_user_recipes/{page}(page = ${currentPage + 1})}">Next</a>
+            </div>
+        </div>
+    </div>
+
     <div class="container">
 
         <div class="row">
@@ -49,7 +56,6 @@
                         <a th:href="@{/product/view/{id}(id = ${product.getId()})}">
                             <h5 th:text="${product.getProductName()}">Homemade italian pasta</h5>
                         </a>
-                        <p>2 Comments</p>
                     </div>
                 </div>
             </div>

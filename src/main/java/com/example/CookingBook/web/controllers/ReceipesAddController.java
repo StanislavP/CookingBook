@@ -167,7 +167,9 @@ public class ReceipesAddController {
         }
         UserEntity user = userService.getUserByEmail(principal.getName());
         ReceiptEntity receiptEntity = new ReceiptEntity();
-        String photo = this.cloudinaryService.uploadImage(receiptAddDTO.getPhoto());
+        String photo = "";
+        if(!receiptAddDTO.getPhoto().isEmpty())
+            photo = this.cloudinaryService.uploadImage(receiptAddDTO.getPhoto());
         List<IngredientDTO> ingredients = receiptAddDTO.getIngredientList();
         List<IngredientEntity> ingredientsForReceipt = new ArrayList<>();
         DifficultyEntity difficulty = difficultyService.findByDifficulty(receiptAddDTO.getDifficulty());
