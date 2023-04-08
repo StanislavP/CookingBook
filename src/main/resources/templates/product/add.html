@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/head}">
+</head>
+
+<body>
+<!-- Preloader -->
+<div id="preloader">
+    <i class="circle-preloader"></i>
+    <img src="/images/core-img/salad.png" alt="">
+</div>
+
+<!-- ##### Header Area Start ##### -->
+<header class="header-area">
+
+    <div th:replace="~{fragments/header}"></div>
+
+    <!-- Navbar Area -->
+    <div class="delicious-main-menu">
+        <div class="classy-nav-container breakpoint-off">
+            <div class="container">
+                <nav th:replace="~{fragments/navigation}"></nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!--Recipe adding form-->
+<div class="contact-area section-padding-0-80">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="shadow p-3 mb-5 bg-body rounded contact-form-area">
+                    <!--                    <div class="row">-->
+                    <div class="col-12">
+                        <div class="section-heading">
+                            <h3>Add product</h3>
+                        </div>
+                    </div>
+                    <form th:method="POST"
+                          th:action="@{/product/add}"
+                          th:object="${productDTO}"
+                          class="main-form mx-auto col-md-10 d-flex flex-column justify-content-center">
+
+                        <div id="productInput">
+                                <div id="row" class="row align-items-center">
+
+                                    <div class="form-group col-sm-8 align-self-center">
+                                        <label for="productName"
+                                               class="font-bold justify-content-center">
+                                            Product name
+                                        </label>
+
+                                        <input
+                                                th:field="*{productName}"
+                                                th:errorclass="'is-invalid alert-danger'"
+                                                id="productName"
+                                                name="productName"
+                                                type="text"
+                                                min="5"
+                                                max="50"
+                                                class="form-control"
+                                                placeholder="Product name"
+                                                required/>
+                                        <small class="invalid-feedback  text-danger" th:errors="*{productName}">Title error message</small>
+                                    </div>
+                                    <div class="form-group col-sm mb-3">
+                                        <label for="selectName"
+                                               class="font-bold justify-content-center">
+                                           Category
+                                        </label>
+                                        <select id="selectName" th:field="*{category}" th:value="*{category}">
+                                            <option th:each="categ :  ${T(com.example.CookingBook.enums.Categories).values()}" th:text="${categ}" th:value="${categ}"/>
+<!--                                                    th:selected="*{category}.equals(categ.name()) ? true : false"/>-->
+                                            <small class="invalid-feedback  text-danger" th:errors="*{category}">MeasureUnit error message</small>
+                                        </select>
+                                    </div>
+                                </div>
+                        </div>
+
+
+                        <!--  Product Description  -->
+                        <div class="row">
+                            <div class="col-12">
+                                <label for="recipeDesc"
+                                       class="font-bold justify-content-center">
+                                    Description
+                                </label>
+
+                                <textarea th:field="*{description}"
+                                          th:errorclass="'is-invalid alert-danger'"
+                                          id="recipeDesc"
+                                          name="recipeDesc"
+                                          type="text"
+                                          maxlength="128"
+                                          class="form-control"
+                                          placeholder="Product Description"
+                                           ></textarea>
+                                <small class="invalid-feedback  text-danger" th:errors="*{description}">Recipe
+                                    description error
+                                    message</small>
+                            </div>
+                        </div>
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="section-heading">
+                                        <input type="submit" class="btn delicious-btn mt-30" value="Add product"/>
+                                    </div>
+                                </div>
+                            </div>
+<!--                        </div>-->
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Footer Area -->
+<footer th:replace="~{fragments/footer}"></footer>
+
+<!-- All Javascript Files -->
+<div th:replace="~{fragments/scripts}"></div>
+</body>
+
+</html>

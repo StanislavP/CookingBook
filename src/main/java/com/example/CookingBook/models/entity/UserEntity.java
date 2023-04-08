@@ -9,8 +9,12 @@ import java.util.List;
 @Table(name = "users")
 public class UserEntity extends  BaseEntity {
 
-    @Column(name = "user_name")
-    private String username;
+    @Column
+    private String firstName; //–  first name of the user.
+
+    @Column
+    private String lastName; //–  last name of the user.
+
 
     @Column(name = "password")
     private String password;
@@ -54,12 +58,21 @@ public class UserEntity extends  BaseEntity {
         return this;
     }
 
-    public String getUsername() {
-        return username;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public UserEntity setUsername(String username) {
-        this.username = username;
+    public UserEntity setFirstName(String firstName) {
+        this.firstName = firstName;
+        return this;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public UserEntity setLastName(String lastName) {
+        this.lastName = lastName;
         return this;
     }
 

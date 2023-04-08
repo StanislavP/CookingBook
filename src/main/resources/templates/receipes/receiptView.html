@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/head}">
+</head>
+
+<body>
+<!-- Preloader -->
+<div id="preloader">
+    <i class="circle-preloader"></i>
+    <img src="/images/core-img/salad.png" alt="">
+</div>
+
+<!-- ##### Header Area Start ##### -->
+<header class="header-area">
+
+    <div th:replace="~{fragments/header}"></div>
+
+    <!-- Navbar Area -->
+    <div class="delicious-main-menu">
+        <div class="classy-nav-container breakpoint-off">
+            <div class="container">
+                <nav th:replace="~{fragments/navigation}"></nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<!-- ##### Breadcumb Area Start ##### -->
+<div class="breadcumb-area bg-img bg-overlay" style="background-image: url(/images/bg-img/breadcumb3.jpg);">
+    <div class="container h-100">
+        <div class="row h-100 align-items-center">
+            <div class="col-12">
+                <div class="breadcumb-text text-center">
+                    <h2>Recipe</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ##### Breadcumb Area End ##### -->
+
+<div class="receipe-post-area section-padding-80">
+
+
+    <!-- Receipe Slider -->
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="receipe-slider owl-carousel">
+                    <img th:src="${receipt.getPicture_url()}" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Receipe Content Area -->
+    <div class="receipe-content-area">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-12 col-md-8">
+                    <div class="receipe-headline my-5">
+                        <span th:text="${#dates.format(receipt.getCreatedDate(),'dd-MMM-yyyy')}">April 05, 2018</span>
+                        <h2 th:text="${receipt.name}">Vegetarian cheese salad</h2>
+                        <div class="receipe-duration">
+                            <h6 th:text="${'Prep: ' + receipt.prep_time + ' mins'}">Prep: 15 mins</h6>
+                            <h6 th:text="${'Cook: ' + receipt.cooking_time + ' mins'}">Cook: 30 mins</h6>
+                            <h6 th:text="${'Yields: ' + receipt.servings + ' mins'}">Yields: 8 Servings</h6>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-4">
+                    <div class="receipe-ratings text-right my-5">
+                        <a class="btn delicious-btn" th:text="${receipt.difficulty.getDifficulty()}"
+                           th:title="${receipt.difficulty.description}">For Begginers</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 col-lg-8">
+                    <!-- Single Preparation Step -->
+                    <div class="single-preparation-step d-flex">
+                        <p th:text="${receipt.preparation}">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                            Vestibulum nec varius dui.
+                            Suspendisse potenti. Vestibulum ac pellentesque tortor. Aenean congue sed metus in iaculis.
+                            Cras a tortor enim. Phasellus posuere vestibulum ipsum, eget lobortis purus. Orci varius
+                            natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. </p>
+                    </div>
+                </div>
+
+                <!-- Ingredients -->
+                <div class="col-12 col-lg-4">
+                    <div class="ingredients">
+                        <h4>Ingredients</h4>
+                        <!-- Custom Checkbox -->
+                        <div th:each="ingridient,iter:${receipt.getIngredients()}"
+                             class="custom-control custom-checkbox">
+                            <input type="checkbox" class="btn-check" th:id="${'btn-check-outlined'+iter.index}">
+                            <label class="btn btn-outline-success" th:for="${'btn-check-outlined'+iter.index}"
+                                   th:text="${ingridient.getQuantity() + ' ' + ingridient.getMeasureUnit().unitName + ' '+ ingridient.getProduct().name}">
+                                4 Tbsp (57 gr)
+                                butter</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-heading">
+                        <a th:if="${isReceiptOnUser}" th:href="@{/receipes/edit/{id}(id = ${id})}"
+                           class="btn delicious-btn mt-30">Edit</a>
+                        <form th:if="${isReceiptOnUser}" th:action="@{/receipes/delete/{id}(id = ${id})}"
+                              th:method="POST">
+
+                            <button type="submit" class="btn delicious-btn mt-30">Delete</button>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-heading text-left">
+                        <h3>Comments</h3>
+
+                        <div th:each="comment: ${comments}" class="single-feature-area mb-80">
+                            <div class="d-flex align-items-center mb-30">
+                                <h5 th:text="${comment.getUserEntity().getFirstName()}">Italian Food</h5>
+                            </div>
+                            <p th:text="${comment.comment}">Aenean congue sed metus in iaculis. Cras a tortor enim. Phasellus posuere vestibulum
+                                ipsum, eget lobortis purus. Orci varius natoque penatibu.</p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-heading text-left">
+                        <h3>Leave a comment</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="contact-form-area">
+                        <form th:object="${commentDTO}" th:action="@{/receipes/comment/{receiptID}(receiptID=${receipt.id})}" th:method="post">
+                            <div class="row">
+                                <form>
+                                    <div class="col-12">
+                                    <textarea th:field="*{comment}" required maxlength="200" name="message" class="form-control" id="message" cols="30" rows="10"
+                                              placeholder="Message"></textarea>
+                                    </div>
+                                    <div class="col-12">
+                                        <button class="btn delicious-btn mt-30" type="submit">Post Comments</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Footer Area -->
+<footer th:replace="~{fragments/footer}"></footer>
+
+<!-- All Javascript Files -->
+<div th:replace="~{fragments/scripts}"></div>
+</body>
+
+</html>

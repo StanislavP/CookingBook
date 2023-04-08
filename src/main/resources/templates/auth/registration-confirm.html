@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/head}"></head>
+
+<body>
+<!-- Preloader -->
+<div id="preloader">
+  <i class="circle-preloader"></i>
+  <img src="/images/core-img/salad.png" alt="">
+</div>
+
+<!-- ##### Header Area Start ##### -->
+<header class="header-area">
+
+  <div th:replace="~{fragments/header}"></div>
+
+  <!-- Navbar Area -->
+  <div class="delicious-main-menu">
+    <div class="classy-nav-container breakpoint-off">
+      <div class="container">
+        <nav th:replace="~{fragments/navigation}"></nav>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- ##### Header Area End ##### -->
+
+
+<div class="d-flex align-items-center justify-content-center vh-60">
+  <div class="text-center">
+    <p class="lead">Congratulations! Your account has been activated and email is verified!</p>
+    <a th:href="@{/auth/login}" class="btn delicious-btn mt-30">Go Login</a>
+  </div>
+</div>
+
+
+<!-- ##### Contact Area End ##### -->
+
+<!-- Footer Area -->
+<footer th:replace="~{fragments/footer}"></footer>
+
+<!-- All Javascript Files -->
+<div th:replace="~{fragments/scripts}"></div>
+</body>
+
+</html>

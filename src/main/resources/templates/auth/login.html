@@ -29,73 +29,82 @@
 <!-- ##### Header Area End ##### -->
 
 <!-- ##### Contact Area Start ##### -->
-<div class="contact-area section-padding-0-80">
+
+<div class="contact-area mx-auto col-md-7 d-flex">
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <div class="section-heading">
-                    <h3>Login</h3>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-12">
-                <div class="contact-form-area">
-                    <form th:method="POST"
-                          th:action="@{/auth/login}"
-                          class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
-
-                        <div class="form-group">
-                            <label for="username"
-                                   class="text-white font-weight-bold">
-                                Username
-                            </label>
-
-                            <input th:classappend="${bad_credentials !=  null? 'alert-danger' : ''}" value="username"
-                                   id="username"
-                                   name="username"
-                                   th:value="${username}"
-                                   type="text"
-                                   min="2"
-                                   max="50"
-                                   class="form-control"
-                                   placeholder="Username"/>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="password" class="text-white font-weight-bold">Password</label>
-                            <input th:classappend="${bad_credentials !=  null? 'alert-danger' : ''}"  id="password" name="password" type="password" min="2"
-                                   max="20" class="form-control"
-                                   placeholder="Password"/>
-
-                        </div>
-
-                        <p th:if="${bad_credentials}"
-                           class="errors alert alert-danger">
-                            Invalid username or password.
-                        </p>
-
-                        <div class="row">
-                            <div class="col col-md-4">
-                                <div class="button-holder d-flex">
-                                    <input type="submit" class="btn delicious-btn mt-30" value="Login"/>
-                                </div>
+                <div class="shadow p-3 mb-5 bg-body rounded contact-form-area">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="section-heading">
+                                <h3>Login</h3>
                             </div>
                         </div>
-                    </form>
+                        <form th:method="POST"
+                              th:action="@{/auth/login}"
+                              class="main-form mx-auto col-md-10 d-flex flex-column justify-content-center">
+
+                            <div class="form-group">
+                                <label for="username"
+                                       class="font-weight-bold">
+                                    Email
+                                </label>
+                                <input th:classappend="${bad_credentials !=  null? 'alert-danger' : ''}"
+                                       value="username"
+                                       id="username"
+                                       name="username"
+                                       th:value="${username}"
+                                       type="email"
+                                       max="50"
+                                       class="form-control"
+                                       placeholder="Email"
+                                       required/>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="password" class="font-weight-bold">Password</label>
+                                <input th:classappend="${bad_credentials !=  null? 'alert-danger' : ''}" id="password"
+                                       name="password" type="password" min="5"
+                                       max="20" class="form-control"
+                                       placeholder="Password"
+                                       required/>
+
+                            </div>
+                            <div class="form-group">
+                            <p><input type='checkbox' name='remember-me'/> Remember me on this computer.</p>
+                            </div>
+                            <p th:if="${bad_credentials}"
+                               class="errors alert alert-danger">
+                                Invalid username or password.
+                            </p>
+                            <p th:if="${not_active}"
+                               class="errors alert alert-danger">
+                                User is not activated.
+                            </p>
+
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="section-heading">
+                                        <input type="submit" class="btn delicious-btn mt-30" value="Login"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<!-- ##### Contact Area End ##### -->
 
-<!-- Footer Area -->
-<footer th:replace="~{fragments/footer}"></footer>
 
-<!-- All Javascript Files -->
-<div th:replace="~{fragments/scripts}"></div>
+    <!-- Footer Area -->
+    <footer th:replace="~{fragments/footer}"></footer>
+
+    <!-- All Javascript Files -->
+    <div th:replace="~{fragments/scripts}"></div>
 </body>
 
 </html>

@@ -14,22 +14,17 @@
                 <div class="breaking-news">
                     <div id="breakingNewsTicker" class="ticker">
                         <ul>
-                            <li><a href="#">Hello Delicious!</a></li>
+                            <th:block sec:authorize="!isAuthenticated()">
+                                <li><a href="#">Hello Delicious!</a></li>
+                            </th:block>
+
+                            <th:block  sec:authorize="isAuthenticated()">
+                                <li><a href="#" th:text =" 'Hello, ' + ${ #authentication.getPrincipal().getUsername()} + '!'" >User name!</a></li>
+                            </th:block>
+
                             <li><a href="#">Cooking book makes dreams come true.</a></li>
                         </ul>
                     </div>
-                </div>
-            </div>
-
-            <!-- Top Social Info -->
-            <div class="col-12 col-sm-6">
-                <div class="top-social-info text-right">
-                    <a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
-                    <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                    <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                    <a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a>
-                    <a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a>
-                    <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
                 </div>
             </div>
         </div>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/head}">
+</head>
+
+<body>
+<!-- Preloader -->
+<div id="preloader">
+    <i class="circle-preloader"></i>
+    <img src="/images/core-img/salad.png" alt="">
+</div>
+
+<!-- ##### Header Area Start ##### -->
+<header class="header-area">
+
+    <div th:replace="~{fragments/header}"></div>
+
+    <!-- Navbar Area -->
+    <div class="delicious-main-menu">
+        <div class="classy-nav-container breakpoint-off">
+            <div class="container">
+                <nav th:replace="~{fragments/navigation}"></nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!--Recipe adding form-->
+<div class="contact-area section-padding-0-80">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="shadow p-3 mb-5 bg-body rounded contact-form-area">
+                    <!--                    <div class="row">-->
+                    <div class="col-12">
+                        <div class="section-heading">
+                            <h3>Change role</h3>
+                        </div>
+                    </div>
+                    <form th:method="POST"
+                          th:action="@{/admin/change}"
+                          th:object="${userChangeRoleDTO}"
+                          class="main-form mx-auto col-md-10 d-flex flex-column justify-content-center">
+
+                        <div id="productInput">
+                            <div id="row" class="row align-items-center">
+
+                                <div class="form-group col-sm-8 align-self-center">
+                                    <label for="userEmail"
+                                           class="font-bold justify-content-center">
+                                        User email
+                                    </label>
+
+                                    <input
+                                            th:field="*{email}"
+                                            th:classappend="${EmailError !=  null? 'alert-danger' : ''}"
+                                            id="userEmail"
+                                            name="userEmail"
+                                            type="text"
+                                            min="5"
+                                            max="50"
+                                            class="form-control"
+                                            placeholder="User email"
+                                            required/>
+                                    <p th:if="${EmailError}"
+                                       class="errors alert alert-danger">
+                                        Email noy found.
+                                    </p>
+                                </div>
+                                <div class="form-group col-sm mb-3">
+                                    <label for="selectName"
+                                           class="font-bold justify-content-center">
+                                        Role
+                                    </label>
+                                    <select  id="selectName" th:field="*{userRole}" th:value="*{userRole}">
+                                        <option value="">NONE</option>
+                                        <option th:each="role :  ${T(com.example.CookingBook.enums.UserRoles).values()}" th:text="${role}" th:value="${role}"/>
+                                        <!--                                                    th:selected="*{category}.equals(categ.name()) ? true : false"/>-->
+                                        <small class="invalid-feedback  text-danger" th:errors="*{userRole}"></small>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="section-heading">
+                                    <input type="submit" class="btn delicious-btn mt-30" value="Change role"/>
+                                </div>
+                            </div>
+                        </div>
+                        <!--                        </div>-->
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Footer Area -->
+<footer th:replace="~{fragments/footer}"></footer>
+
+<!-- All Javascript Files -->
+<div th:replace="~{fragments/scripts}"></div>
+</body>
+
+</html>

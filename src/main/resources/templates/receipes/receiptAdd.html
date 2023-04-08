@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/head}">
+</head>
+
+<body>
+<!-- Preloader -->
+<div id="preloader">
+    <i class="circle-preloader"></i>
+    <img src="/images/core-img/salad.png" alt="">
+</div>
+
+<!-- ##### Header Area Start ##### -->
+<header class="header-area">
+
+    <div th:replace="~{fragments/header}"></div>
+
+    <!-- Navbar Area -->
+    <div class="delicious-main-menu">
+        <div class="classy-nav-container breakpoint-off">
+            <div class="container">
+                <nav th:replace="~{fragments/navigation}"></nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!--Recipe adding form-->
+<div class="contact-area section-padding-0-80">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="shadow p-3 mb-5 bg-body rounded contact-form-area">
+                    <!--                    <div class="row">-->
+                    <div class="col-12">
+                        <div class="section-heading">
+                            <h3>Add recipe</h3>
+                        </div>
+                    </div>
+
+                    <form th:method="POST"
+                          th:action="@{/receipes/add}"
+                          th:object="${receiptAddDTO}"
+                          enctype="multipart/form-data"
+                          class="main-form mx-auto col-md-10 d-flex flex-column justify-content-center">
+
+                        <div class="row">
+                            <div class="col-12">
+                                <label for="rec-photo" class="font-bold justify-content-center">Recipe image</label>
+                                <input type="file" id="rec-photo" class="form-control-file" name="photo" >
+                                <div class="d-flex flex-column justify-content-center align-items-center">
+                                <div id="preview" class="d-flex"> </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- TitleReceipt-->
+                        <div class="row">
+                            <div class="col-12">
+                                <label for="name"
+                                       class="font-bold justify-content-center">
+                                    Title
+                                </label>
+
+                                <input
+                                        th:field="*{name}"
+                                        th:errorclass="'is-invalid alert-danger'"
+                                        id="name"
+                                        name="name"
+                                        type="text"
+                                        min="5"
+                                        max="50"
+                                        class="form-control"
+                                        placeholder="Recipe Title"
+                                        required/>
+                                <small class="invalid-feedback  text-danger" th:errors="*{name}">Title error message</small>
+                            </div>
+                        </div>
+
+                        <!--  Receipt Description  -->
+                        <div class="row">
+                            <div class="col-12">
+                                <label for="recipeDesc"
+                                       class="font-bold justify-content-center">
+                                    Description
+                                </label>
+
+                                <textarea th:field="*{description}"
+                                          th:errorclass="'is-invalid alert-danger'"
+                                          id="recipeDesc"
+                                          name="recipeDesc"
+                                          type="text"
+                                          minlength="5"
+                                          maxlength="4096"
+                                          class="form-control"
+                                          placeholder="Recipe Description"
+                                          required></textarea>
+                                <small class="invalid-feedback  text-danger" th:errors="*{description}">Recipe
+                                    description error
+                                    message</small>
+                            </div>
+                        </div>
+
+
+                        <div class="row align-items-center">
+                            <label for="preparation"
+                                   class="font-bold justify-content-center">
+                                Preparation, cooking and serving
+                            </label>
+                            <div id="preparation">
+                                <div class="col-lg-auto">
+                                    <div class="row align-items-center">
+                                        <div class="form-group col-sm align-self-center">
+
+                                            <input th:field="*{prep_time}"
+                                                   th:errorclass="'is-invalid alert-danger'"
+                                                   id="prepTime"
+                                                   name="prepTime"
+                                                   min="1"
+                                                   type="text" pattern="\d*" maxlength="4"
+                                                   class="form-control"
+                                                   placeholder="Prep time"
+                                                   required/>
+                                            <small class="invalid-feedback  text-danger" th:errors="*{prep_time}">Prep
+                                                time error
+                                                message</small>
+                                        </div>
+                                        <div class="form-group col-sm align-self-center">
+
+                                            <input th:field="*{cooking_time}"
+                                                   th:errorclass="'is-invalid alert-danger'"
+                                                   id="cookTime"
+                                                   name="cookTime"
+                                                   min="1"
+                                                   type="text" pattern="\d*" maxlength="4"
+                                                   class="form-control"
+                                                   placeholder="Cook time"
+                                                   required/>
+                                            <small class="invalid-feedback  text-danger" th:errors="*{cooking_time}">Cooking
+                                                time error
+                                                message</small>
+                                        </div>
+                                        <div class="form-group col-sm align-self-center">
+
+                                            <input th:field="*{servings}"
+                                                   th:errorclass="'is-invalid alert-danger'"
+                                                   id="servings"
+                                                   name="servings"
+                                                   min="1"
+                                                   type="text" pattern="\d*" maxlength="3"
+                                                   class="form-control"
+                                                   placeholder="Servings"
+                                                   required/>
+                                            <small class="invalid-feedback  text-danger" th:errors="*{servings}">Servings error message</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--  Ingredients -->
+                            <label for="ingredients"
+                                   class="font-bold justify-content-center">
+                                Ingredients
+                            </label>
+                            <div id="ingredients">
+                                <div class="contact-area section-padding-0-70">
+                                    <div class="col-lg-auto">
+                                        <div id="ingredientsInput">
+
+
+                                            <datalist id="unitsDet">
+                                                <option th:each="units :  ${T(com.example.CookingBook.enums.MeasureUnits).values()}" th:text="${units}"></option>
+                                            </datalist>
+
+
+                                            <th:block th:if="${receiptAddDTO.ingredientList}"
+                                                      th:each="ingredient, ingrediant_stat : ${receiptAddDTO.ingredientList}">
+                                                <div id="row" class="row align-items-center">
+
+                                                    <div class="form-group col-sm-auto mb-3">
+                                                        <button class="btn btn-outline-danger"
+                                                                id="DeleteRow" type="button">
+                                                            <i class="bi bi-trash"></i>X
+                                                        </button>
+                                                    </div>
+                                                    <div class="form-group col-sm align-self-center">
+                                                        <input th:value="${ingredient.getProductName()}"
+                                                               th:name="|ingredientList[${ingrediant_stat.index}].productName|"
+                                                               th:errorclass="'is-invalid alert-danger'"
+                                                               min="1"
+                                                               type="text" maxlength="20"
+                                                               class="form-control"
+                                                               placeholder="Product name"
+                                                               onfocusout="funcProductName(this)"
+                                                               required/>
+                                                        <small class="invalid-feedback  text-danger" th:errors="*{ingredientList[__${ingrediant_stat.index}__].productName}">Product error message</small>
+                                                    </div>
+                                                    <div class="form-group col-sm align-self-center">
+                                                        <input th:value="${ingredient.getQuantity().doubleValue()}"
+                                                               th:name="|ingredientList[${ingrediant_stat.index}].quantity|"
+                                                               th:errorclass="'is-invalid alert-danger'"
+                                                               min="1"
+                                                               type="text" maxlength="9"
+                                                               class="form-control"
+                                                               placeholder="Quantity"
+                                                               required
+                                                               />
+                                                        <small class="invalid-feedback  text-danger" th:errors="*{ingredientList[__${ingrediant_stat.index}__].quantity}">Quantity error message</small>
+                                                    </div>
+                                                    <div class="form-group col-sm mb-3">
+
+                                                        <select th:value="${ingredient.getMeasureUnit()}"
+                                                                th:name="|ingredientList[${ingrediant_stat.index}].measureUnit|">
+                                                            <option th:each="units :  ${T(com.example.CookingBook.enums.MeasureUnits).values()}" th:text="${units}"
+                                                            th:selected="${ingredient.getMeasureUnit().equals(units)} ? true : false"/>
+                                                            <small class="invalid-feedback  text-danger" th:errors="*{ingredientList[__${ingrediant_stat.index}__].measureUnit}">MeasureUnit error message</small>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </th:block>
+                                        </div>
+
+                                        <button id="rowAdder" type="button"
+                                                class="btn btn-outline-success float-sm-end">
+                                            <span class="bi bi-plus-square-dotted"></span>+
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--  Receipt Description  -->
+                            <div>
+
+                                <label for="cookingProc"
+                                       class="font-bold justify-content-center">
+                                    Cooking procedure
+                                </label>
+
+                                <textarea
+                                        th:field="*{preparation}"
+                                        th:errorclass="'is-invalid alert-danger'"
+                                        id="cookingProc"
+                                        name="cookingProc"
+                                        type="text"
+                                        minlength="5"
+                                        maxlength="4096"
+                                        class="form-control"
+                                        placeholder="Cooking Procedure"
+                                        required></textarea>
+                                <small class="invalid-feedback  text-danger" th:errors="*{preparation}">Firstname error
+                                    message</small>
+
+                            </div>
+
+                            <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                                <th:block th:each="diff,iter : ${T(com.example.CookingBook.enums.Difficulty).values()}">
+                                <input th:field="*{difficulty}" value="EASY" type="radio" class="btn-check" name="btnradio" th:id="btnradio + ${iter.index}" id="btnradio" autocomplete="off" >
+                                <label class="btn btn-outline-success" th:for="btnradio + ${iter.index}" th:text="${diff}">Easy</label>
+                                </th:block>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="section-heading">
+                                        <input type="submit" class="btn delicious-btn mt-30" value="Add recipe"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Footer Area -->
+<footer th:replace="~{fragments/footer}"></footer>
+
+
+<script>
+
+   async function funcProductName(myvar) {
+       console.log("Hello world!");
+
+       let response = await fetch("http://localhost:8080/api/v3/product/isAvailable/"+ myvar.value)
+           .then((response) => response.json())
+           .then((data) => {
+               console.log(data)
+               if (data !== true)
+                alert("Product with name "+myvar.value+" not exist")
+           })
+           .catch(console.error);
+
+   }
+    function previewImages() {
+
+        let preview = document.querySelector('#preview');
+
+        $("#preview").empty();
+
+        if (this.files) {
+            [].forEach.call(this.files, readAndPreview);
+        }
+
+        function readAndPreview(file) {
+
+            // Make sure `file.name` matches our extensions criteria
+            if (!/\.(jpe?g|png|gif)$/i.test(file.name)) {
+                return alert(file.name + " is not an image");
+            } // else...
+
+            let reader = new FileReader();
+
+            reader.addEventListener("load", function() {
+                let image = new Image();
+                image.title  = file.name;
+                image.src    = this.result;
+                image.style = "width:250px;height:auto;";
+                preview.appendChild(image);
+            });
+
+            reader.readAsDataURL(file);
+
+        }
+
+    }
+
+    document.querySelector('#rec-photo').addEventListener("change", previewImages);
+</script>
+
+<!-- All Javascript Files -->
+<div th:replace="~{fragments/scripts}"></div>
+</body>
+
+</html>

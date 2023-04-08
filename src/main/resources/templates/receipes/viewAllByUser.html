@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/head}">
+</head>
+
+<body>
+<!-- Preloader -->
+<div id="preloader">
+  <i class="circle-preloader"></i>
+  <img src="/images/core-img/salad.png" alt="">
+</div>
+
+<!-- ##### Header Area Start ##### -->
+<header class="header-area">
+
+  <div th:replace="~{fragments/header}"></div>
+
+  <!-- Navbar Area -->
+  <div class="delicious-main-menu">
+    <div class="classy-nav-container breakpoint-off">
+      <div class="container">
+        <nav th:replace="~{fragments/navigation}"></nav>
+      </div>
+    </div>
+  </div>
+</header>
+
+
+<section class="small-receipe-area section-padding-80-0">
+  <h5 th:if="${isEmpty}" class="text-center">No receipts to show!</h5>
+  <a th:if="${isPrevVisible}" th:href="@{/receipes/view_all/{page}(page = ${currentPage - 1})}">Prev</a>
+  <a th:if="${isNextVisible}" th:href="@{/receipes/view_all/{page}(page = ${currentPage + 1})}">Next</a>
+  <div class="container">
+
+    <div class="row">
+
+      <!-- Small Receipe Area -->
+      <div th:each="receipt:${receipts}" class="col-12 col-sm-6 col-lg-4">
+        <div class="single-small-receipe-area d-flex">
+          <!-- Receipe Thumb -->
+          <div class="receipe-thumb">
+            <img th:src="${receipt.getPicture_url()}" alt="">
+          </div>
+          <!-- Receipe Content -->
+          <div class="receipe-content">
+            <span th:text="${#dates.format(receipt.getCreatedDate(),'dd-MMM-yyyy')}">January 04, 2018</span>
+            <a th:href="@{/receipes/view/{receiptID}(receiptID = ${receipt.getId()})}">
+              <h5 th:text="${receipt.getName()}">Homemade italian pasta</h5>
+            </a>
+            <p>2 Comments</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<!-- ##### Small Receipe Area End ##### -->
+
+
+<!-- Footer Area -->
+<footer th:replace="~{fragments/footer}"></footer>
+
+<!-- All Javascript Files -->
+<div th:replace="~{fragments/scripts}"></div>
+</body>
+
+</html>

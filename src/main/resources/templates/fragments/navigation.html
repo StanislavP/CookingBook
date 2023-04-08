@@ -10,7 +10,7 @@
 <nav th:fragment="navigation" class="classy-navbar justify-content-between" id="deliciousNav">
 
     <!-- Logo -->
-    <a class="nav-brand" th:href="@{/index.html}"><img th:src="@{/images/core-img/logo.png}" alt=""></a>
+    <a class="nav-brand" th:href="@{/}"><img th:src="@{/images/core-img/logo.png}" alt=""></a>
 
     <!-- Navbar Toggler -->
     <div class="classy-navbar-toggler">
@@ -28,77 +28,47 @@
         <!-- Nav Start -->
         <div class="classynav">
             <ul>
-                <li class="active"><a href="index.html">Home</a></li>
-                <li><a href="#">Pages</a>
-                    <ul class="dropdown">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="blog-post.html">Blog Post</a></li>
-                        <li><a href="receipe-post.html">Receipe Post</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                        <li><a href="elements.html">Elements</a></li>
-                        <li><a href="#">Dropdown</a>
+                <li>
+                    <a th:href="@{/}">Home</a></li>
+                <th:block sec:authorize="isAuthenticated()">
+                    <li><a th:href="@{/receipes/view_all}">Receipes</a>
+                        <ul class="dropdown">
+                            <li><a th:href="@{/receipes/add}">Add</a></li>
+                            <li><a th:href="@{/receipes/view_all}">View all</a></li>
+                            <li><a th:href="@{/receipes/view_user_recipes}">My receipts</a></li>
+                        </ul>
+                    </li>
+                    <th:block sec:authorize="hasRole('ROLE_MODERATOR')">
+                        <li><a th:href="@{/product/view_all}">Products</a>
                             <ul class="dropdown">
-                                <li><a href="index.html">Home</a></li>
-                                <li><a href="about.html">About Us</a></li>
-                                <li><a href="blog-post.html">Blog Post</a></li>
-                                <li><a href="receipe-post.html">Receipe Post</a></li>
-                                <li><a href="contact.html">Contact</a></li>
-                                <li><a href="elements.html">Elements</a></li>
-                                <li><a href="#">Dropdown</a>
-                                    <ul class="dropdown">
-                                        <li><a href="index.html">Home</a></li>
-                                        <li><a href="about.html">About Us</a></li>
-                                        <li><a href="blog-post.html">Blog Post</a></li>
-                                        <li><a href="receipe-post.html">Receipe Post</a></li>
-                                        <li><a href="contact.html">Contact</a></li>
-                                        <li><a href="elements.html">Elements</a></li>
-                                    </ul>
-                                </li>
+                                <li><a th:href="@{/product/add}">Add</a></li>
+                                <li><a th:href="@{/product/view_all}">View all</a></li>
                             </ul>
                         </li>
-                    </ul>
-                </li>
-                <li><a href="#">Mega Menu</a>
-                    <div class="megamenu">
-                        <ul class="single-mega cn-col-4">
-                            <li class="title">Catagory</li>
-                            <li><a href="index.html">Home</a></li>
-                            <li><a href="about.html">About Us</a></li>
-                            <li><a href="blog-post.html">Blog Post</a></li>
-                            <li><a href="receipe-post.html">Receipe Post</a></li>
-                            <li><a href="contact.html">Contact</a></li>
-                            <li><a href="elements.html">Elements</a></li>
-                        </ul>
-                        <ul class="single-mega cn-col-4">
-                            <li class="title">Catagory</li>
-                            <li><a href="index.html">Home</a></li>
-                            <li><a href="about.html">About Us</a></li>
-                            <li><a href="blog-post.html">Blog Post</a></li>
-                            <li><a href="receipe-post.html">Receipe Post</a></li>
-                            <li><a href="contact.html">Contact</a></li>
-                            <li><a href="elements.html">Elements</a></li>
-                        </ul>
-                        <ul class="single-mega cn-col-4">
-                            <li class="title">Catagory</li>
-                            <li><a href="index.html">Home</a></li>
-                            <li><a href="about.html">About Us</a></li>
-                            <li><a href="blog-post.html">Blog Post</a></li>
-                            <li><a href="receipe-post.html">Receipe Post</a></li>
-                            <li><a href="contact.html">Contact</a></li>
-                            <li><a href="elements.html">Elements</a></li>
-                        </ul>
-                        <div class="single-mega cn-col-4">
-                            <div class="receipe-slider owl-carousel">
-                                <a href="#"><img src="/images/bg-img/bg1.jpg" alt=""></a>
-                                <a href="#"><img src="/images/bg-img/bg6.jpg" alt=""></a>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li><a href="receipe-post.html">Receipies</a></li>
-                <li><a href="receipe-post.html">4 Vegans</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                    </th:block>
+                    <th:block sec:authorize="!hasRole('ROLE_MODERATOR')">
+                        <li><a th:href="@{/product/view_all}">Products</a></li>
+                    </th:block>
+                </th:block>
+                <th:block sec:authorize="isAuthenticated()">
+                    <li><a th:href="@{/user/profile}">Profile</a></li>
+                    <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                        <li><a th:href="@{/admin/settings}">Admin</a></li>
+                    </th:block>
+                </th:block>
+                <th:block sec:authorize="!isAuthenticated()">
+                    <li><a th:href="@{/receipes/view_all}">Receipes</a></li>
+
+                    <li><a th:href="@{/auth/register}">Register</a></li>
+
+                    <li><a th:href="@{/auth/login}">Login</a></li>
+
+                </th:block>
+                <th:block sec:authorize="isAuthenticated()">
+                    <li><a onclick="submit_logout()">
+                        <form id="logout_btn" th:action="@{/auth/logout}" method="POST">Logout</form>
+                    </a></li>
+                </th:block>
             </ul>
 
         </div>

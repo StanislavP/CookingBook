@@ -2,6 +2,7 @@ package com.example.CookingBook.services;
 
 import com.example.CookingBook.models.entity.RoleEntity;
 import com.example.CookingBook.models.entity.UserEntity;
+import org.modelmapper.internal.bytebuddy.implementation.bytecode.Throw;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -23,16 +24,40 @@ public class AppUserDetailsService implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepository.findUserByUsername(username)
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        UserDetails tempUser = userRepository.findByEmail(email)
                 .map(this::map)
-                .orElseThrow(() -> new UsernameNotFoundException("User with name " + username + " not found!"));
+                .orElseThrow(() -> new UsernameNotFoundException("User with name " + email + " not found!"));
+        if (!tempUser.isEnabled()) {
+            throw new UsernameNotFoundException("User with name " + email + " not activated!");
+        }
+        return tempUser;
     }
+
+//    @Override
+//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+//        // TODO Auto-generated method stub
+//        User user=userservice.getUserByusername(username);
+//
+//        if(user != null && user.isEnabled()) {//here you can check that
+//            List<GrantedAuthority> authorities = getUserAuthority(user.getRoles());
+//            return buildUserForAuthentication(user, authorities);
+//        }
+//
+//        else {
+//            throw new UsernameNotFoundException("username not found");
+//        }
+//
+//    }
 
 
     private UserDetails map(UserEntity userEntity) {
-        return new User(userEntity.getUsername(),
+        return new User(userEntity.getEmail(),
                 userEntity.getPassword(),
+                userEntity.getActive(),
+                true,
+                true,
+                true,
                 extractAuthorities(userEntity));
     }
 

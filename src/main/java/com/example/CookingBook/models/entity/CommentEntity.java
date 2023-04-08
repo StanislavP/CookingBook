@@ -14,7 +14,24 @@ public class CommentEntity extends BaseEntity{
     @ManyToOne
     private UserEntity userEntity;
 
-    @OneToOne
-    private ReceiptEntity receiptEntity;
+    public CommentEntity() {
+    }
 
+    public String getComment() {
+        return comment;
+    }
+
+    public CommentEntity setComment(String comment) {
+        this.comment = comment;
+        return this;
+    }
+
+    public UserEntity getUserEntity() {
+        return userEntity;
+    }
+
+    public CommentEntity setUserEntity(UserEntity userEntity) {
+        this.userEntity = userEntity;
+        return this;
+    }
 }

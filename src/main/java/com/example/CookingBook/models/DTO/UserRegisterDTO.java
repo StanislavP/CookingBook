@@ -1,29 +1,34 @@
 package com.example.CookingBook.models.DTO;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Size;
-
+import jakarta.validation.constraints.*;
 public class UserRegisterDTO {
-    @Size(min = 3,max = 20, message = "Username length must be between 3 and 20 characters!")
-    private String username;
-    @Size(min = 3,max = 20, message = "Password length must be between 3 and 20 characters!")
-    private String password;
-    @Size(min = 3,max = 20, message = "Password length must be between 3 and 20 characters!")
-    private String confirmPassword;
+    @NotBlank
     @Email
-    @NotEmpty(message = "Email cannot be empty!")
+    @Size( max = 50)
     private String email;
 
-    public UserRegisterDTO() {
+    @NotNull
+    @Size(min = 5, max = 20)
+    private String password;
+
+    @NotNull
+    @Size(min = 5, max = 20)
+    private String confirmPassword;
+
+    @NotNull
+    @Size(min = 5, max = 20)
+    private String firstName;
+
+    @NotNull
+    @Size(min = 5, max = 20)
+    private String lastName;
+
+    public String getEmail() {
+        return email;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public UserRegisterDTO setUsername(String username) {
-        this.username = username;
+    public UserRegisterDTO setEmail(String email) {
+        this.email = email;
         return this;
     }
 
@@ -45,12 +50,21 @@ public class UserRegisterDTO {
         return this;
     }
 
-    public String getEmail() {
-        return email;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public UserRegisterDTO setEmail(String email) {
-        this.email = email;
+    public UserRegisterDTO setFirstName(String firstName) {
+        this.firstName = firstName;
+        return this;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public UserRegisterDTO setLastName(String lastName) {
+        this.lastName = lastName;
         return this;
     }
 }

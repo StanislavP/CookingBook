@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/head}"></head>
+
+<body>
+<!-- Preloader -->
+<div id="preloader">
+    <i class="circle-preloader"></i>
+    <img src="/images/core-img/salad.png" alt="">
+</div>
+
+<!-- ##### Header Area Start ##### -->
+<header class="header-area">
+
+    <div th:replace="~{fragments/header}"></div>
+
+    <!-- Navbar Area -->
+    <div class="delicious-main-menu">
+        <div class="classy-nav-container breakpoint-off">
+            <div class="container">
+                <nav th:replace="~{fragments/navigation}"></nav>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- ##### Header Area End ##### -->
+
+<!-- ##### Contact Area Start ##### -->
+<div class="contact-area section-padding-0-80">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="shadow p-3 mb-5 bg-body rounded contact-form-area">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="section-heading">
+                                <h3>Profile</h3>
+                            </div>
+                        </div>
+
+                        <form th:object="${userInfo}"
+                              class="main-form mx-auto col-md-10 d-flex flex-column justify-content-center">
+                            <div class="row">
+                                <div class="form-group col-md-6 mb-3">
+
+                                    <label th:for="firstName"
+                                           class="font-weight-bold">First Name</label>
+
+                                    <input
+                                            th:field="*{firstName}"
+                                            th:errorclass="'is-invalid alert-danger'"
+                                            type="text"
+                                            class="form-control"
+                                            placeholder="First name"
+                                            min="5"
+                                            max="20"
+                                            disabled
+                                    />
+                                    <small class="invalid-feedback  text-danger" th:errors="*{lastName}">Firstname error
+                                        message</small>
+                                </div>
+
+                                <div class="form-group col-md-6 mb-3">
+
+                                    <label th:for="lastName"
+                                           class="font-weight-bold">Last Name</label>
+
+                                    <input th:field="*{lastName}"
+                                           th:errorclass="'is-invalid alert-danger'"
+                                           class="form-control"
+                                           placeholder="Last name"
+                                           type="text"
+                                           min="5"
+                                           max="20"
+                                           disabled
+                                    />
+                                    <small class="invalid-feedback  text-danger" th:errors="*{lastName}">Lastname error
+                                        message</small>
+
+                                </div>
+                            </div>
+                            <div class="row">
+
+                                <div class="form-group mb-3">
+
+                                    <label th:for="email"
+                                           class="font-weight-bold">
+                                        Username
+                                    </label>
+
+                                    <input th:field="*{email}"
+                                           th:errorclass="'is-invalid alert-danger'"
+                                           class="form-control"
+                                           placeholder="Email"
+                                           th:value="*{email}"
+                                           type="email"
+                                           max="50"
+                                           disabled/>
+                                    <small class="invalid-feedback  text-danger" th:errors="*{email}">Email error
+                                        message</small>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ##### Contact Area End ##### -->
+
+<!-- Footer Area -->
+<footer th:replace="~{fragments/footer}"></footer>
+
+<!-- All Javascript Files -->
+<div th:replace="~{fragments/scripts}"></div>
+</body>
+
+</html>
